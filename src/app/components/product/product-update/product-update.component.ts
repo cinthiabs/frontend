@@ -8,32 +8,35 @@ import { Product } from '../product.model';
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.css']
 })
-export class ProductUpdateComponent implements OnInit{
- /* product:Product = {
+export class ProductUpdateComponent  implements OnInit{
+  products:Product = {
     id: 0,
     name:'',
     price: 0
 
-  }*/
-  product!: Product;
+  }
+
   constructor(
     private productService:ProductService,
     private router: Router,
-    private route:ActivatedRoute){}
+    private route:ActivatedRoute){
+      
+    }
 
   ngOnInit(){
     const id = this.route.snapshot.paramMap.get('id');
     if (id !=null){
       this.productService.readById(id).subscribe(product =>{
-        this.product = product
+        this.products = product
       });
     }
    
   }
+  
   updateProduct():void{
-    console.log(this.product);
-    this.productService.update(this.product).subscribe(() =>{
-      this.productService.showMessage('Produto atualizado com sucesso!')
+    console.log(this.products);
+    this.productService.update(this.products).subscribe(() =>{
+      this.productService.showMessage('Produto atualizado com sucesso!',true)
       this.router.navigate(['/products']);
     })
 

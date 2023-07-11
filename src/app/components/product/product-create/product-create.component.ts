@@ -28,7 +28,7 @@ export class ProductCreateComponent implements OnInit{
   }
   createProduct():void{
     this.productService.create(this.product).subscribe(()=>{
-      this.productService.showMessage('Operação executada com sucesso')
+      this.productService.showMessage('Operação executada com sucesso',true)
       this.router.navigate(['/products'])
     })
     
